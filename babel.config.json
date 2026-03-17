@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "presets": [
     [
@@ -9,3 +10,16 @@
     ]
   ]
 }
+=======
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic",
+        "compiler": true
+      }
+    ]
+  ]
+}
+>>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
