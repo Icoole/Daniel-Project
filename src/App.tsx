@@ -5,19 +5,25 @@ import { CreditCards } from '@/pages/CreditCards';
 import { AutoLoans } from '@/pages/AutoLoans';
 import { Membership } from '@/pages/Membership';
 import { About } from '@/pages/About';
-import { ViewBalance } from '@/pages/ViewBalance';
+import { Login } from '@/pages/Login';
+import Index from '@/pages/Index';
+import TransferRestricted from '@/pages/TransferRestricted';
+import { Business } from '@/pages/Business';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/checking-savings" element={<CheckingSavings />} />
         <Route path="/credit-cards" element={<CreditCards />} />
         <Route path="/auto-loans" element={<AutoLoans />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/about" element={<About />} />
-        <Route path="/view-balance" element={<ViewBalance />} />
+        <Route path="/dashboard" element={<Index />} />
+        <Route path="/transfer-restricted" element={<TransferRestricted />} />
+        <Route path="/business" element={<Business />} />
       </Routes>
     </BrowserRouter>
   );

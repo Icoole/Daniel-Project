@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5% 25%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 5% 12%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --benefit: 45 100% 50%;
+    --benefit-foreground: 240 10% 3.9%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 210 100% 50%;
+
+    --transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
+    --transition-layout: 400ms cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'IBM Plex Mono', monospace !important;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-balance-cents {
+    @apply text-muted-foreground;
+  }
+
+  .card-surface {
+    @apply bg-card border border-border rounded-xl p-6;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.12);
+  }
+
+  .card-surface-benefit {
+    @apply bg-card rounded-xl p-6;
+    border: 1px solid hsl(var(--benefit) / 0.4);
+    box-shadow: 0 0 20px hsl(var(--benefit) / 0.08), 0 8px 30px rgb(0 0 0 / 0.12);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.15);
+  }
+
+  .glow-benefit {
+    box-shadow: 0 0 20px hsl(var(--benefit) / 0.15);
+  }
+
+  .tracking-display {
+    letter-spacing: -0.04em;
+  }
+
+  .tracking-label {
+    letter-spacing: 0.2em;
+  }
+}
