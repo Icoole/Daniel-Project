@@ -3,47 +3,16 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, 
-<<<<<<< HEAD
-=======
-  ChevronDown, 
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
   MapPin, 
   User, 
   Menu, 
   X,
-<<<<<<< HEAD
   Wallet
 } from 'lucide-react';
 import { mainNavItems, secondaryNavItems } from '@/data/navigation';
 
-
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-=======
-  Search,
-  Wallet
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { mainNavItems, secondaryNavItems } from '@/data/navigation';
-import { useIsMobile } from '@/hooks/useMediaQuery';
-
-export function Navbar() {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
-
-  const handleMouseEnter = (label: string) => {
-    if (!isMobile) {
-      setActiveDropdown(label);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (!isMobile) {
-      setActiveDropdown(null);
-    }
-  };
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
 
   return (
     <header className="w-full">
@@ -78,11 +47,7 @@ export function Navbar() {
             {/* Right Side Actions */}
             <div className="flex items-center space-x-4">
               <Link 
-<<<<<<< HEAD
                 to="/dashboard" 
-=======
-                to="/view-balance" 
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
                 className="hidden md:flex items-center text-sm hover:text-orange transition-colors"
               >
                 <Wallet className="h-4 w-4 mr-1" />
@@ -97,19 +62,10 @@ export function Navbar() {
                 Branches & ATMs
               </Link>
               
-<<<<<<< HEAD
               <Link to="/login" className="bg-orange hover:bg-orange-dark text-white text-sm font-semibold px-4 py-2 rounded-md transition-colors flex items-center">
                 <User className="h-4 w-4 mr-2" />
                 Sign In
               </Link>
-=======
-              <Button 
-                className="bg-orange hover:bg-orange-dark text-white text-sm font-semibold"
-              >
-                <User className="h-4 w-4 mr-2" />
-                Sign In
-              </Button>
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
 
               {/* Mobile Menu Button */}
               <button
@@ -130,7 +86,6 @@ export function Navbar() {
       {/* Secondary Navigation - Desktop */}
       <div className="hidden lg:block bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<<<<<<< HEAD
           <nav className="flex items-center space-x-8">
             {secondaryNavItems.map((item) => (
               <Link
@@ -141,67 +96,6 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-=======
-          <nav className="flex items-center space-x-1">
-            {secondaryNavItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(item.label)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link
-                  to={item.href}
-                  className="flex items-center px-4 py-3 text-sm font-semibold text-navy hover:text-link hover:bg-gray-50 transition-colors"
-                >
-                  {item.label}
-                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                    activeDropdown === item.label ? 'rotate-180' : ''
-                  }`} />
-                </Link>
-
-                {/* Mega Menu Dropdown */}
-                <AnimatePresence>
-                  {activeDropdown === item.label && item.sections && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25, ease: [0, 0, 0.2, 1] }}
-                      className="absolute left-0 top-full z-50 w-[600px] bg-white shadow-lg rounded-b-lg border border-gray-200"
-                    >
-                      <div className="p-6 grid grid-cols-3 gap-6">
-                        {item.sections.map((section) => (
-                          <div key={section.title}>
-                            <h3 className="font-semibold text-navy text-sm mb-3">
-                              {section.title}
-                            </h3>
-                            <ul className="space-y-2">
-                              {section.items.map((subItem) => (
-                                <li key={subItem.label}>
-                                  <Link
-                                    to={subItem.href}
-                                    className="text-sm text-gray-600 hover:text-link hover:underline transition-colors"
-                                  >
-                                    {subItem.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-            
-            {/* Search Icon */}
-            <button className="ml-auto p-2 text-navy hover:text-link transition-colors">
-              <Search className="h-5 w-5" />
-            </button>
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
           </nav>
         </div>
       </div>
@@ -215,7 +109,6 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-b border-gray-200"
           >
-<<<<<<< HEAD
             <div className="px-4 py-4 space-y-2">
               {mainNavItems.map((item) => (
                 <Link
@@ -240,50 +133,12 @@ export function Navbar() {
               <hr className="border-gray-200 my-4" />
               <Link 
                 to="/dashboard" 
-=======
-            <div className="px-4 py-4 space-y-4">
-              {/* Main Nav Items */}
-              <div className="space-y-2">
-                {mainNavItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="block py-2 text-navy font-semibold"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-              
-              <hr className="border-gray-200" />
-              
-              {/* Secondary Nav Items */}
-              <div className="space-y-2">
-                {secondaryNavItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="block py-2 text-navy"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-              
-              <hr className="border-gray-200" />
-              
-              <Link 
-                to="/view-balance" 
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
                 className="flex items-center py-2 text-navy"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Wallet className="h-4 w-4 mr-2" />
                 View Balance
               </Link>
-<<<<<<< HEAD
               <Link 
                 to="/login" 
                 className="flex items-center py-2 text-navy font-semibold"
@@ -291,15 +146,6 @@ export function Navbar() {
               >
                 <User className="h-4 w-4 mr-2" />
                 Sign In
-=======
-              
-              <Link 
-                to="#" 
-                className="flex items-center py-2 text-navy"
-              >
-                <MapPin className="h-4 w-4 mr-2" />
-                Branches & ATMs
->>>>>>> 8cf2bd6fccbde7a0c16c32d8eebb6f9598f50334
               </Link>
             </div>
           </motion.div>
@@ -308,3 +154,4 @@ export function Navbar() {
     </header>
   );
 }
+
