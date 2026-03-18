@@ -2,9 +2,9 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { EligibilityForm } from '@/components/EligibilityForm';
+import { Check, Star } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 const creditCards = [
@@ -108,11 +108,7 @@ export function CreditCards() {
                     Platinum card, gold-star savings—pay 0% interest the first year 
                     on transferred balances and change your whole game.
                   </p>
-                  <Button 
-                    className="bg-orange hover:bg-orange-dark text-white font-semibold mt-6"
-                  >
-                    See Offer Details
-                  </Button>
+<EligibilityForm product="Credit Cards" />
                 </div>
                 <div className="flex justify-center">
                   <img
@@ -180,13 +176,13 @@ export function CreditCards() {
                     ))}
                   </ul>
                   
-                  <Link
-                    to={card.href}
-                    className="inline-flex items-center text-link font-semibold mt-6 hover:underline"
+                  <Button 
+                    variant="link"
+                    className="p-0 h-auto text-link font-semibold mt-6 hover:underline"
+                    asChild
                   >
-                    Learn More
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
+                    <EligibilityForm product={card.name} />
+                  </Button>
                 </motion.div>
               ))}
             </motion.div>

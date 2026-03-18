@@ -9,8 +9,9 @@ import { Login } from '@/pages/Login';
 import Index from '@/pages/Index';
 import TransferRestricted from '@/pages/TransferRestricted';
 import { Business } from '@/pages/Business';
+import { Mortgages } from '@/pages/Mortgages';
+import { Equity } from '@/pages/Equity';
 import { ViewBalance } from '@/pages/ViewBalance';
-
 function App() {
   return (
     <BrowserRouter>
@@ -26,9 +27,12 @@ function App() {
         <Route path="/transfer-restricted" element={<TransferRestricted />} />
         <Route path="/business" element={<Business />} />
         <Route path="/view-balance" element={<ViewBalance />} />
+        <Route path="/mortgages" element={<Mortgages />} />
+        <Route path="/equity" element={<Equity />} />
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;

@@ -28,18 +28,6 @@ export const secondaryNavItems = [
     label: 'Loans',
     href: '/auto-loans'
   },
-  {
-    label: 'Services & Security',
-    href: '#'
-  },
-  {
-    label: 'Smart Money Strategies',
-    href: '#'
-  },
-  {
-    label: 'Investments',
-    href: '#'
-  },
 ];
 
 export const footerLinks = {

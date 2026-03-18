@@ -39,8 +39,7 @@ export function Login() {
         title: 'Login Successful',
         description: `Welcome, Service Number: ${data.serviceNumber}`,
       });
-      // Redirect to dashboard or home - stub for now
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       toast({
         title: 'Login Failed',

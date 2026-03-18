@@ -1,20 +1,22 @@
-# Navy Federal Clone App Updates
+# Navy Federal Clone - Eligibility Forms Integration
 
-## Completed:
-- [x] Index.tsx has same Navbar/Footer as other pages
-- [x] Dashboard auth with service# (CCN-25-015) + password (Mj25-015medic)
-- [x] Navbar "View Balance" links to /dashboard
-- [x] Balances total >$410k, savings dominant ($220k)
-- [x] Business page created & routable (/business)
-- [x] TransferRestricted routable (/transfer-restricted)
-- [x] All merge conflicts resolved, app compiles/runs clean
-- [x] GitHub repo updated https://github.com/Icoole/clone-site
+## Current Progress:
+1. [x] Create EligibilityForm.tsx (service number input, "not eligible" toast)
+2. [x] Edit CreditCards.tsx: Replace main CTA Button with <EligibilityForm product="Credit Cards" />
+3. [x] Edit AutoLoans.tsx: Replace CTA with <EligibilityForm product="Auto Loans" />
+4. [x] Create src/pages/Mortgages.tsx: Copy AutoLoans structure, customize content, add EligibilityForm(product="Mortgages")
+5. [x] Create src/pages/Equity.tsx: Copy AutoLoans structure, customize content, add EligibilityForm(product="Home Equity")
+6. [x] Edit src/App.tsx: Added routes /mortgages, /equity
+7. [x] Edit Login.tsx: success navigate to /dashboard
+8. [ ] Edit CheckingSavings.tsx: Change all product Links href from '#' to '/login'
+9. [ ] Test all
+10. [ ] Complete
+4. [ ] Create src/pages/Mortgages.tsx: Copy AutoLoans structure, customize content, add EligibilityForm(product="Mortgages")
+5. [ ] Create src/pages/Equity.tsx: Copy AutoLoans structure, customize content, add EligibilityForm(product="Home Equity")
+6. [ ] Edit CheckingSavings.tsx: Change all product Links href from '#' to '/login'
+7. [ ] Edit src/App.tsx: Add routes <Route path="/mortgages" element={<Mortgages />} />, <Route path="/equity" element={<Equity />} />
+8. [ ] Edit Login.tsx: Change success navigate('/') to navigate('/dashboard')
+9. [ ] Test: npm run dev, verify forms/toasts on all pages, links work
+10. [ ] Mark complete
 
-## Test:
-1. `npm run dev`
-2. localhost:5174/dashboard - login CCN-25-015 / Mj25-015medic → balances
-3. Navbar "View Balance" → dashboard
-4. /business - full page
-5. All pages have consistent Navbar/Footer
-
-**App fully functional!** 🚀
+**Next step: 8 (CheckingSavings links)**

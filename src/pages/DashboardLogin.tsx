@@ -70,7 +70,7 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
               <Input
                 id="serviceNumber"
                 {...form.register('serviceNumber')}
-                placeholder="e.g. CCN-25-015"
+                placeholder="e.g. DTY-345-RY"
               />
               {form.formState.errors.serviceNumber && (
                 <p className="text-sm text-destructive">{form.formState.errors.serviceNumber.message}</p>
