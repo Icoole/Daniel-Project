@@ -9,7 +9,7 @@ interface BalanceCardProps {
   benefitActive?: boolean;
   showAction?: boolean;
   actionLabel?: string;
-  onAction?: () => void;
+  // onAction?: () => void;
   sparklineData?: number[];
 }
 
@@ -44,7 +44,7 @@ const BalanceCard = ({
   benefitActive = false,
   showAction = false,
   actionLabel = "Initiate Transfer",
-  onAction,
+  // onAction,
   sparklineData,
 }: BalanceCardProps) => {
   const navigate = useNavigate();

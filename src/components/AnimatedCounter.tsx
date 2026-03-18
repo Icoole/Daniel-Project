@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useSpring } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -19,7 +19,7 @@ const AnimatedCounter = ({ value, className = "", prefix = "$", showCents = true
   useEffect(() => {
     const unsubscribe = spring.on("change", (v) => {
       const whole = Math.floor(v);
-      const cents = Math.floor((v - whole) * 100);
+      // const cents = Math.floor((v - whole) * 100);
       setDisplay(whole.toLocaleString("en-US"));
     });
     return unsubscribe;
