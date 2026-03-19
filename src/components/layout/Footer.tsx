@@ -59,9 +59,10 @@ export function Footer() {
           {/* Social Icons */}
           <div className="flex items-center space-x-4">
             <a 
-              href="#" 
+              href="https://www.facebook.com/NavyFederal/" 
               className="text-white hover:text-orange transition-colors"
               aria-label="Facebook"
+              target="_blank" rel="noopener noreferrer"
             >
               <Facebook className="h-6 w-6" />
             </a>
@@ -80,9 +81,10 @@ export function Footer() {
               <XIcon className="h-5 w-5" />
             </a>
             <a 
-              href="#" 
+              href="https://www.instagram.com/navyfederal/" 
               className="text-white hover:text-orange transition-colors"
               aria-label="Instagram"
+              target="_blank" rel="noopener noreferrer"
             >
               <Instagram className="h-6 w-6" />
             </a>

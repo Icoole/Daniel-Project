@@ -18,6 +18,19 @@ export default {
         mono: ['IBM Plex Mono', 'monospace'],
       },
       colors: {
+        navy: {
+          50: '#f0f9ff',
+          500: '#1e40af',
+          600: '#1e3a8a', 
+          700: '#1e3a8a',
+          800: '#1e293b',
+          900: '#0f172a',
+        },
+        blue: {
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -92,5 +105,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [(await import("tailwindcss-animate")).default],
 } satisfies Config;

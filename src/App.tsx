@@ -7,33 +7,37 @@ import { Membership } from '@/pages/Membership';
 import { About } from '@/pages/About';
 import { Login } from '@/pages/Login';
 import Index from '@/pages/Index';
-import TransferRestricted from '@/pages/TransferRestricted';
-import { Business } from '@/pages/Business';
-import { Mortgages } from '@/pages/Mortgages';
-import { Equity } from '@/pages/Equity';
-import { ViewBalance } from '@/pages/ViewBalance';
+import PaymentHistory from '@/pages/PaymentHistory';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import { AuthProvider } from '@/contexts/AuthContext';
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/checking-savings" element={<CheckingSavings />} />
-        <Route path="/credit-cards" element={<CreditCards />} />
-        <Route path="/auto-loans" element={<AutoLoans />} />
-        <Route path="/membership" element={<Membership />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<Index />} />
-        <Route path="/transfer-restricted" element={<TransferRestricted />} />
-        <Route path="/business" element={<Business />} />
-        <Route path="/view-balance" element={<ViewBalance />} />
-        <Route path="/mortgages" element={<Mortgages />} />
-        <Route path="/equity" element={<Equity />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="min-h-screen flex flex-col bg-gray-50">
+          <Navbar />
+          <div className="flex-1 pb-24">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/checking-savings" element={<CheckingSavings />} />
+              <Route path="/credit-cards" element={<CreditCards />} />
+              <Route path="/auto-loans" element={<AutoLoans />} />
+              <Route path="/membership" element={<Membership />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/dashboard" element={<Index />} />
+              <Route path="/payment-history" element={<PaymentHistory />} />
+              {/* TODO: <Route path="/view-balance" element={<ViewBalance />} /> */}
+              {/* TODO: Add other routes as pages are created */}
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
-
 }
 
 export default App;
-

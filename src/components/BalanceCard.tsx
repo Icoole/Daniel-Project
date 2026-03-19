@@ -9,7 +9,7 @@ interface BalanceCardProps {
   benefitActive?: boolean;
   showAction?: boolean;
   actionLabel?: string;
-  // onAction?: () => void;
+  colorScheme?: 'savings' | 'checking' | 'money' | 'certificates' | 'ira' | 'default';
   sparklineData?: number[];
 }
 
@@ -44,18 +44,29 @@ const BalanceCard = ({
   benefitActive = false,
   showAction = false,
   actionLabel = "Initiate Transfer",
-  // onAction,
+  colorScheme = "default",
   sparklineData,
-}: BalanceCardProps) => {
+}: BalanceCardProps & { colorScheme?: 'savings' | 'checking' | 'money' | 'certificates' | 'ira' | 'default' }) => {
   const navigate = useNavigate();
+
+  const getColorScheme = () => {
+    switch (colorScheme) {
+      case 'savings': return 'from-emerald-500/10 to-emerald-400/10 border-emerald-200/50';
+      case 'checking': return 'from-blue-500/10 to-blue-400/10 border-blue-200/50';
+      case 'money': return 'from-amber-500/10 to-amber-400/10 border-amber-200/50';
+      case 'certificates': return 'from-purple-500/10 to-purple-400/10 border-purple-200/50';
+      case 'ira': return 'from-indigo-500/10 to-indigo-400/10 border-indigo-200/50';
+      default: return 'from-primary/10 to-secondary/10 border-primary/20';
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={benefitActive ? "card-surface-benefit" : "card-surface"}
-      whileHover={{ borderColor: benefitActive ? undefined : "hsl(210, 100%, 50%)" }}
-      transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
+      className={`backdrop-blur-xl bg-white/80 dark:bg-black/30 border shadow-2xl rounded-3xl p-8 h-full transition-all duration-500 hover:shadow-3xl ${getColorScheme()}`}
+      whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary))' }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="flex justify-between items-start mb-8">
         <span className="text-sm text-muted-foreground uppercase tracking-label font-semibold">
