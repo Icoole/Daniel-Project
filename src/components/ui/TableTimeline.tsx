@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { TrendingUp, ArrowDown } from "lucide-react";
-
-interface Transaction {
-  date: string;
-  type: 'Deposit' | 'Withdrawal';
-  amount: number;
-  balance: number;
-  counterparty?: string;
-  method?: string;
-  reference?: string;
-}
+import type { Transaction } from '../../types/transaction';
 
 interface TableTimelineProps {
   transactions: Transaction[];
 }
 
 const TableTimelineItem = ({ transaction, index }: { transaction: Transaction; index: number }) => {
-  const isDeposit = transaction.type === 'Deposit';
+  const isDeposit = transaction.type === 'credit';
   const Icon = isDeposit ? TrendingUp : ArrowDown;
 
   return (
@@ -33,24 +24,19 @@ const TableTimelineItem = ({ transaction, index }: { transaction: Transaction; i
           <Icon className={`w-4 h-4 ${isDeposit ? 'text-emerald-400' : 'text-red-400'}`} />
           <div>
             <div className="font-bold text-sm">{transaction.date}</div>
-            <div className="text-xs text-muted-foreground font-mono">{transaction.type}</div>
+            <div className="text-xs text-muted-foreground font-mono">{transaction.type.toUpperCase()}</div>
           </div>
         </div>
       </td>
       <td className="py-3 px-4 flex-1 max-w-md">
         <div className="space-y-0.5">
-          <div className="font-medium text-sm truncate">{transaction.counterparty}</div>
-          {transaction.method && (
-            <div className="text-xs text-muted-foreground font-mono">{transaction.method}</div>
-          )}
-          {transaction.reference && (
-            <div className="text-xs text-slate-500 font-mono">#{transaction.reference}</div>
-          )}
+          <div className="font-medium text-sm truncate">{transaction.description}</div>
+          <div className="text-xs text-slate-500 font-mono">#{transaction.id}</div>
         </div>
       </td>
       <td className="py-3 px-4 w-32 text-right">
         <span className={`text-lg font-bold font-mono ${isDeposit ? 'text-emerald-400' : 'text-red-400'}`}>
-          {isDeposit ? '+' : '-'}${Math.abs(transaction.amount).toLocaleString()}
+          {isDeposit ? '+' : '-'}$ {transaction.amount.toLocaleString()}
         </span>
       </td>
     </motion.tr>

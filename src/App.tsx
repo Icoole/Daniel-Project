@@ -7,7 +7,8 @@ import { Membership } from '@/pages/Membership';
 import { About } from '@/pages/About';
 import { Login } from '@/pages/Login';
 import Index from '@/pages/Index';
-import PaymentHistory from '@/pages/PaymentHistory';
+import TransactionLedger from '@/pages/TransactionLedger';
+import TransferRestricted from '@/pages/TransferRestricted';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -28,9 +29,8 @@ function App() {
               <Route path="/membership" element={<Membership />} />
               <Route path="/about" element={<About />} />
               <Route path="/dashboard" element={<Index />} />
-              <Route path="/payment-history" element={<PaymentHistory />} />
-              {/* TODO: <Route path="/view-balance" element={<ViewBalance />} /> */}
-              {/* TODO: Add other routes as pages are created */}
+              <Route path="/payment-history" element={<TransactionLedger />} />
+              <Route path="/transfer-restricted" element={<TransferRestricted />} />
             </Routes>
           </div>
           <Footer />
@@ -41,3 +41,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,22 +1,13 @@
-import { motion } from "framer-motion";
+ import { motion } from "framer-motion";
 import { TrendingUp, ArrowDown } from "lucide-react";
-
-interface Transaction {
-  date: string;
-  type: 'Deposit' | 'Withdrawal';
-  amount: number;
-  balance: number;
-  counterparty?: string;
-  method?: string;
-  reference?: string;
-}
+import type { Transaction } from '../../types/transaction';
 
 interface TimelineProps {
   transactions: Transaction[];
 }
 
 const TimelineItem = ({ transaction, index }: { transaction: Transaction; index: number }) => {
-  const isDeposit = transaction.type === 'Deposit';
+  const isDeposit = transaction.type === 'credit';
   const Icon = isDeposit ? TrendingUp : ArrowDown;
 
   return (
@@ -41,14 +32,14 @@ const TimelineItem = ({ transaction, index }: { transaction: Transaction; index:
           <div className="flex items-center gap-1.5">
             <div className={`w-2 h-2 rounded-full shadow-md ${isDeposit ? 'bg-green-400/90' : 'bg-red-400/90'}`} />
             <Icon className={`w-3 h-3 ${isDeposit ? 'text-green-400' : 'text-red-400'}`} />
-            <h3 className="font-bold text-xs truncate">{transaction.type}</h3>
+            <h3 className="font-bold text-xs truncate">{transaction.type.toUpperCase()}</h3>
           </div>
         </div>
 
-        {/* Balance */}
+        {/* Amount */}
         <div className="text-right pr-1">
           <div className="text-sm font-mono text-gray-100 bg-gray-800/70 px-1.5 py-0.5 rounded-lg border border-gray-600/70 text-xs">
-            ${transaction.balance.toLocaleString()}
+            {isDeposit ? '+' : '-'}$ {transaction.amount.toLocaleString()}
           </div>
         </div>
       </div>

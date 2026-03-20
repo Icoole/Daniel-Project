@@ -80,7 +80,7 @@ const BalanceCard = ({
         </div>
       </div>
 
-      <AnimatedCounter value={amount} className="text-3xl font-semibold" />
+<AnimatedCounter value={amount} className="text-3xl md:text-4xl font-bold tracking-tight font-['Inter']" />
 
       {subtitle && (
         <p className="text-xs text-muted-foreground mt-2">

@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { motion } from "framer-motion";
-
-import AnimatedCounter from "@/components/AnimatedCounter";
-import BalanceCard from "@/components/BalanceCard";
-import AccountHeader from "@/components/AccountHeader";
-import { DashboardLogin } from './DashboardLogin';
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/hooks/useAuth';
+import { DashboardLogin } from './DashboardLogin';
+import AccountHeader from "@/components/AccountHeader";
+import BalanceCard from "@/components/BalanceCard";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import type { Transaction } from '../types/transaction';
+import { TRANSACTIONS as allTransactions } from '../../data/transactions';
 
-import { TableTimeline } from '@/components/ui/TableTimeline';
 
+
+const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
 const BASE_DATA = {
   savings: 220000.75,
@@ -19,36 +25,7 @@ const BASE_DATA = {
   ira: 28500.80,
 };
 
-const sparklines = {
-  savings: [218000, 219000, 219500, 220000, 219800, 219900, 220000],
-  checking: [84500, 85000, 84800, 85200, 85050, 84900, 85000],
-  moneyMarket: [44500, 44800, 45000, 44900, 45000, 44950, 45000],
-  certificates: [32200, 32400, 32500, 32450, 32500, 32520, 32500],
-  ira: [28000, 28200, 28400, 28450, 28500, 28530, 28500],
-};
-
-interface Transaction {
-  date: string;
-  type: 'Deposit' | 'Withdrawal';
-  amount: number;
-  balance: number;
-  counterparty?: string;
-  method?: string;
-  reference?: string;
-}
-
-const PAYMENT_HISTORY: Transaction[] = [
-  { date: 'Feb 1, 2026', type: 'Deposit', amount: 5200, balance: 333500, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202602' },
-  { date: 'Jan 1, 2026', type: 'Deposit', amount: 5100, balance: 328300, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202601' },
-  { date: 'Dec 1, 2025', type: 'Deposit', amount: 4700, balance: 323200, counterparty: 'Dividend Payment', method: 'ACH', reference: 'DIV-IRA-2512' },
-  { date: 'Nov 1, 2025', type: 'Deposit', amount: 5800, balance: 318500, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202511' },
-  { date: 'Oct 1, 2025', type: 'Deposit', amount: 4200, balance: 312700, counterparty: 'Tax Refund', method: 'ACH', reference: 'IRS-REFUND-2025' },
-  { date: 'Sep 1, 2025', type: 'Deposit', amount: 5500, balance: 308500, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202509' },
-  { date: 'Aug 15, 2025', type: 'Withdrawal', amount: -80000, balance: 303000, counterparty: 'Home Purchase', method: 'Wire Transfer', reference: 'MTG-DOWNPAY-850815' },
-  { date: 'Jul 1, 2025', type: 'Deposit', amount: 6400, balance: 383000, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202507' },
-  { date: 'Jun 1, 2025', type: 'Deposit', amount: 5100, balance: 376600, counterparty: 'Interest Payment', method: 'ACH', reference: 'INT-MM-202506' },
-  { date: 'May 1, 2025', type: 'Deposit', amount: 7200, balance: 371500, counterparty: 'US Army Payroll', method: 'Direct Deposit', reference: 'PAYROLL-202505' },
-];
+const totalLiquidity = Object.values(BASE_DATA).reduce((sum, v) => sum + v, 0);
 
 const container = {
   hidden: { opacity: 0 },
@@ -68,127 +45,124 @@ const Index = () => {
   const [isPrivate, setIsPrivate] = useState(false);
   const { toast } = useToast();
 
-  const totalLiquidity =
-    BASE_DATA.savings + BASE_DATA.checking + BASE_DATA.moneyMarket + BASE_DATA.certificates + BASE_DATA.ira;
-
   const handleLoginSuccess = (sn: string) => {
     login(sn);
-    toast({
-      title: 'Dashboard Unlocked',
-      description: 'Welcome to your account balances.',
-    });
+    toast({ title: 'Dashboard Unlocked', description: 'Welcome to your account balances.' });
   };
+
+  if (!isAuthenticated) {
+    return <DashboardLogin onSuccess={handleLoginSuccess} />;
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-8 pt-8 sm:pt-12 pb-16">
-      {!isAuthenticated ? (
-        <DashboardLogin onSuccess={handleLoginSuccess} />
-      ) : (
-        <div className="bg-background text-foreground space-y-6 p-4 md:p-8 rounded-2xl shadow-lg"> 
-          <AccountHeader
-            name="Lucia"
-            rank="O-4"
-            branch="US ARMY"
-            serviceNumber={serviceNumber || "CCN-25-015"}
-            mos="68W — Combat Medic"
-            isPrivate={isPrivate}
-            onTogglePrivacy={() => setIsPrivate(!isPrivate)}
-          />
-
-          {/* L1: Total Combined Liquidity */}
-          <motion.header
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-12 space-y-2"
-          >
-            <p className="text-muted-foreground uppercase tracking-label text-xs font-semibold">
-              Total Combined Liquidity
-            </p>
-            {isPrivate ? (
-              <h1 className="text-6xl sm:text-7xl font-bold tracking-display font-mono">
-                $•••,•••<span className="text-balance-cents">.••</span>
-              </h1>
-            ) : (
-              <h1 className="text-6xl sm:text-7xl font-bold tracking-display">
-                <AnimatedCounter value={totalLiquidity} />
-              </h1>
-            )}
-            <p className="text-xs text-muted-foreground font-mono">
-              Last synced: {new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} · {new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
-            </p>
-          </motion.header>
-
-          {/* L2: Account Grid */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
-          >
-            <motion.div variants={item}>
-              <BalanceCard
-                label="Savings Account"
-                amount={isPrivate ? 0 : BASE_DATA.savings}
-                subtitle="+2.4% APY"
-                colorScheme="savings"
-                sparklineData={sparklines.savings}
-              />
-            </motion.div>
-            <motion.div variants={item}>
-              <BalanceCard
-                label="Withdrawable Immediately"
-                amount={isPrivate ? 0 : BASE_DATA.checking}
-                subtitle="Checking · No hold period"
-                colorScheme="checking"
-                showAction
-                actionLabel="Initiate Transfer"
-                sparklineData={sparklines.checking}
-              />
-            </motion.div>
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 space-y-8 p-6 md:p-8 rounded-3xl shadow-2xl backdrop-blur-xl border border-slate-200/50">
+        <AccountHeader
+          name="Lucia"
+          serviceNumber={serviceNumber || "CCN-25-015"}
+          isPrivate={isPrivate}
+          onTogglePrivacy={() => setIsPrivate(!isPrivate)}
+        />
+        <motion.header initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 space-y-3 text-center md:text-left">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Combined Liquidity</p>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight font-mono">
+            <AnimatedCounter value={totalLiquidity} />
+          </h1>
+          <p className="text-xs text-slate-500 font-mono">
+            Last synced: {new Date().toLocaleString()}
+          </p>
+        </motion.header>
+        <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <motion.div variants={item}>
+            <BalanceCard 
+              label="Savings Account" 
+              amount={isPrivate ? 0 : BASE_DATA.savings} 
+              subtitle="+2.4% APY" 
+              colorScheme="savings" 
+            />
           </motion.div>
-
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
-          >
-            <motion.div variants={item}>
-              <BalanceCard
-                label="Money Market"
-                amount={isPrivate ? 0 : BASE_DATA.moneyMarket}
-                subtitle="+4.1% APY · $2,500 min"
-                colorScheme="money"
-                sparklineData={sparklines.moneyMarket}
-              />
-            </motion.div>
-            <motion.div variants={item}>
-              <BalanceCard
-                label="Share Certificates"
-                amount={isPrivate ? 0 : BASE_DATA.certificates}
-                subtitle="12-mo term · Matures Aug 2026"
-                colorScheme="certificates"
-                sparklineData={sparklines.certificates}
-              />
-            </motion.div>
-            <motion.div variants={item}>
-              <BalanceCard
-                label="IRA Contributions"
-                amount={isPrivate ? 0 : BASE_DATA.ira}
-                subtitle="Roth IRA · YTD contrib $6,500"
-                colorScheme="ira"
-                sparklineData={sparklines.ira}
-              />
-            </motion.div>
+          <motion.div variants={item}>
+            <BalanceCard 
+              label="Withdrawable Immediately" 
+              amount={isPrivate ? 0 : BASE_DATA.checking} 
+              subtitle="Checking · No hold period" 
+              colorScheme="checking" 
+              showAction 
+              actionLabel="Initiate Transfer" 
+            />
           </motion.div>
+        </motion.div>
+        <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div variants={item}>
+            <BalanceCard 
+              label="Money Market" 
+              amount={isPrivate ? 0 : BASE_DATA.moneyMarket} 
+              subtitle="+4.1% APY · $2,500 min" 
+              colorScheme="money" 
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <BalanceCard 
+              label="Share Certificates" 
+              amount={isPrivate ? 0 : BASE_DATA.certificates} 
+              subtitle="12-mo term · Matures Aug 2026" 
+              colorScheme="certificates" 
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <BalanceCard 
+              label="IRA Contributions" 
+              amount={isPrivate ? 0 : BASE_DATA.ira} 
+              subtitle="Roth IRA · YTD contrib $6,500" 
+              colorScheme="ira" 
+            />
+          </motion.div>
+        </motion.div>
+        <section className="space-y-4">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold text-slate-900">Recent Transactions</h2>
+            <Badge variant="outline" className="text-xs uppercase">Live · 5 newest</Badge>
+          </div>
+          <Card className="overflow-hidden border-0 shadow-xl">
+            <Table>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent border-b-2 border-slate-200">
+                  <TableHead className="w-28 font-semibold text-slate-700">Date</TableHead>
+                  <TableHead className="font-semibold text-slate-700">Description</TableHead>
+                  <TableHead className="w-32 font-mono text-right font-semibold text-slate-700">Amount</TableHead>
+                <TableHead className="w-24 font-semibold text-slate-700">Type</TableHead>
+                </TableRow>
 
-                <TableTimeline transactions={PAYMENT_HISTORY.slice(0, 6)} />
-        </div>
-      )}
+              </TableHeader>
+              <TableBody>
+{allTransactions.slice(0,5).map((tx) => (
+                  <TableRow key={tx.id} className="hover:bg-gradient-to-r hover:from-slate-50 hover:to-blue-50/30 border-b border-slate-100 transition-all">
+                    <TableCell className="font-mono text-sm font-medium">{formatDate(tx.date)}</TableCell>
+                    <TableCell className="font-medium text-slate-900">{tx.description}</TableCell>
+                    <TableCell className="text-right">
+                      <span className={`font-mono font-bold text-xl ${tx.type === 'credit' ? 'text-green-600 drop-shadow-sm' : 'text-red-600 drop-shadow-sm'}`}>
+                        {tx.type === 'credit' ? '+' : '-'}${Math.abs(tx.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={tx.type === 'credit' ? "default" : "destructive"} className="capitalize shadow-sm">
+                        {tx.type.toUpperCase()}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+<div className="p-6 bg-gradient-to-r from-slate-50 to-blue-50/50 border-t flex justify-end">
+              <Button size="sm" className="font-mono uppercase text-xs tracking-wider shadow-sm hover:shadow-md bg-gradient-to-r from-orange to-orange-dark px-8">View Full History →</Button>
+            </div>
+
+          </Card>
+        </section>
+      </div>
     </div>
   );
 };
 
-
 export default Index;
+

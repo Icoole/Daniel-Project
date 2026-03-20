@@ -19,7 +19,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 export function Login() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading ] = useState(false);
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
@@ -34,13 +34,12 @@ export function Login() {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Login data:', data);
       toast({
         title: 'Login Successful',
         description: `Welcome, Service Number: ${data.serviceNumber}`,
       });
       navigate('/dashboard');
-    } catch (error) {
+    } catch {
       toast({
         title: 'Login Failed',
         description: 'Invalid credentials',

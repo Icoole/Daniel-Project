@@ -1,8 +1,24 @@
-# Transaction History Fix Plan
+# Transaction History Standardization - COMPLETE ✅
 
-## Steps:
-1. [x] Create TODO.md with plan (done)
-2. [x] Edit src/components/ui/TableTimeline.tsx: Complete TableTimelineItem JSX with 3 full <td> cells (Date/Type, Counterparty, Amount) (done)
-3. [x] Update TODO.md with completion status (done)
-4. [x] Test: Refresh /payment-history in browser, verify table renders properly after login (tested via HMR updates)
-5. [x] Complete task
+Unified Transaction interface and centralized mock data implemented across app.
+
+## Completed Steps
+- [x] Create src/types/transaction.ts
+- [x] Create src/data/transactions.ts (22+ mocks)
+- [x] Update Index.tsx, TransactionLedger.tsx, PaymentHistory.tsx
+- [x] Update TableTimeline.tsx, Timeline.tsx
+- [x] Test transaction displays/filters
+- [x] Finalize
+
+# UI Cleanup & Final Fixes
+
+**Current Progress: Starting**
+
+- [x] 1. Delete duplicate *(2).tsx files in src/components/ui/ ✅
+- [x] 2. git add . ✅
+- [ [ ] 3. git commit -m "Remove UI duplicates & finalize fixes"
+- [ ] 4. npx eslint . --fix
+- [ ] 5. bun install
+- [ ] 6. bun dev - verify app (no errors, test login/transactions)
+- [ ] 7. Task complete
+

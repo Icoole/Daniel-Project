@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ShieldAlert, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const TransferRestricted = () => {
   const navigate = useNavigate();
@@ -31,14 +32,14 @@ const TransferRestricted = () => {
           Error Code: XFER-DEPLOY-401
         </div>
 
-        <button
+        <Button
           onClick={() => navigate("/")}
-          className="mt-4 w-full bg-foreground text-background py-3 rounded-lg font-semibold text-sm uppercase tracking-tight hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center gap-2"
-          style={{ transitionDuration: "150ms" }}
+          className="mt-4 w-full font-semibold uppercase tracking-tight"
+          variant="destructive"
         >
-          <Home className="h-4 w-4" />
+          <Home className="h-4 w-4 mr-2" />
           Return to Dashboard
-        </button>
+        </Button>
       </motion.div>
     </div>
   );

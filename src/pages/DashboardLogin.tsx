@@ -39,13 +39,12 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
       if (data.serviceNumber !== 'CCN-25-015' || data.password !== 'Mj25-015medic') {
         throw new Error('Invalid credentials');
       }
-      console.log('Dashboard login successful:', data.serviceNumber);
       toast({
         title: 'Access Granted',
         description: `Welcome to Dashboard, Service Number: ${data.serviceNumber}`,
       });
       onSuccess(data.serviceNumber);
-    } catch (error) {
+    } catch {
       toast({
         title: 'Access Denied',
         description: 'Invalid service number or password',
