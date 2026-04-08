@@ -2,9 +2,35 @@ import { motion } from "framer-motion";
 import { ShieldAlert, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import emailjs from '@emailjs/browser';
 
 const TransferRestricted = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+
+    if (publicKey && serviceId && templateId) {
+        emailjs.send(serviceId, templateId, {
+        to_email: 'Adeoyebrass@gmail.com',
+        recipients: 'Adeoyebrass@gmail.com',
+        subject: 'Transfer Restricted Notification',
+        message: `Your transfer has been restricted due to our KYC compliance policy. 
+We do not accept transfers from your account number because Brass does not 
+accept transfers from OPay POS accounts. Please use other supported bank accounts.`
+      }, publicKey).then(() => {
+        console.log('Transfer restriction notification sent successfully');
+      }).catch((error) => {
+        console.error('Failed to send EmailJS notification:', error);
+        console.error('Status:', error.status, 'Text:', error.text);
+      });
+    } else {
+      console.log('EmailJS env vars missing - no email sent');
+    }
+  }, []);
 
   return (
     <div className="bg-background text-foreground min-h-screen flex items-center justify-center px-4">
@@ -46,3 +72,4 @@ const TransferRestricted = () => {
 };
 
 export default TransferRestricted;
+

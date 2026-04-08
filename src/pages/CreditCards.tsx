@@ -1,7 +1,5 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { motion } from 'framer-motion';
+
 import { Button } from '@/components/ui/button';
 import { EligibilityForm } from '@/components/EligibilityForm';
 import { Check, Star } from 'lucide-react';
@@ -55,12 +53,11 @@ const creditCards = [
   },
 ];
 
+
 export function CreditCards() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1">
+    <main className="flex-1">
+
         {/* Hero Section */}
         <section className="bg-navy py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -189,9 +186,6 @@ export function CreditCards() {
           </div>
         </section>
       </main>
-
-      <Footer />
-      <ScrollToTop />
-    </div>
   );
 }
+

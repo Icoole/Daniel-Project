@@ -1,10 +1,9 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/ui/ScrollToTop';
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Wallet, PiggyBank, Landmark, TrendingUp, GraduationCap, Gift } from 'lucide-react';
+import { ArrowRight, Wallet, PiggyBank, Landmark, TrendingUp, GraduationCap, Gift, Star } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
+
 
 const products = [
   {
@@ -51,27 +50,39 @@ const products = [
   },
 ];
 
+
 export function CheckingSavings() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1">
-        {/* Page Header */}
-        <section className="bg-white py-12 lg:py-16 border-b border-gray-200">
+    <main className="flex-1">
+
+
+        {/* Hero Section */}
+        <section className="bg-navy py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-3xl lg:text-4xl font-bold text-navy"
+              className="text-center"
             >
-              Checking & Savings
-            </motion.h1>
+              <div className="inline-flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full mb-6">
+                <Star className="h-5 w-5 text-orange fill-orange" />
+                <span className="text-white text-sm font-semibold">
+                  TIME #1 in Checking & Savings 2026
+                </span>
+              </div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-white">
+                Checking & Savings
+              </h1>
+              <p className="text-gray-300 text-lg mt-4 max-w-2xl mx-auto">
+                Save more money. Stress way less. Find the perfect account for your lifestyle.
+              </p>
+            </motion.div>
           </div>
         </section>
 
         {/* Products Grid */}
+
         <section className="py-12 lg:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -174,10 +185,9 @@ export function CheckingSavings() {
             </div>
           </div>
         </section>
-      </main>
 
-      <Footer />
-      <ScrollToTop />
-    </div>
+    </main>
   );
 }
+
+

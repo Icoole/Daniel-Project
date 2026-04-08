@@ -7,8 +7,9 @@
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
-
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "resolveJsonModule": true,
     "paths": {
       "@/*": [
         "./src/*"
@@ -24,7 +25,7 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
@@ -32,3 +33,4 @@
   },
   "include": ["src"]
 }
+

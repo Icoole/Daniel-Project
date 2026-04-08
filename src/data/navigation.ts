@@ -11,7 +11,6 @@ export interface MegaMenuSection {
 
 export const mainNavItems: NavItem[] = [
   { label: 'Personal', href: '/' },
-  { label: 'Business', href: '/business' },
   { label: 'Membership', href: '/membership' },
 ];
 
@@ -27,6 +26,10 @@ export const secondaryNavItems = [
   {
     label: 'Loans',
     href: '/auto-loans'
+  },
+  {
+    label: 'Payment History',
+    href: '/payment-history'
   },
 ];
 

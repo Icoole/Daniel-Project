@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from "framer-motion";
 import { TrendingUp, ArrowDown } from "lucide-react";
 import type { Transaction } from '../../types/transaction';
@@ -23,7 +23,7 @@ const TableTimelineItem = ({ transaction, index }: { transaction: Transaction; i
           <div className={`w-2 h-2 rounded-full shadow-md ${isDeposit ? 'bg-emerald-400/90' : 'bg-red-400/90'}`} />
           <Icon className={`w-4 h-4 ${isDeposit ? 'text-emerald-400' : 'text-red-400'}`} />
           <div>
-            <div className="font-bold text-sm">{transaction.date}</div>
+            <div className="font-bold text-sm">Posted {transaction.date}</div>
             <div className="text-xs text-muted-foreground font-mono">{transaction.type.toUpperCase()}</div>
           </div>
         </div>
@@ -48,7 +48,8 @@ export function TableTimeline({ transactions }: TableTimelineProps) {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(transactions.length / itemsPerPage);
 
-  const paginatedTransactions = transactions.slice(
+  const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const paginatedTransactions = sortedTransactions.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -102,3 +103,4 @@ export function TableTimeline({ transactions }: TableTimelineProps) {
     </div>
   );
 }
+

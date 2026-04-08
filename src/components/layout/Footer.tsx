@@ -1,44 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Globe, Facebook, Youtube, Instagram, Linkedin } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { footerLinks } from '@/data/navigation';
-
-// X (Twitter) Icon Component
-function XIcon({ className }: { className?: string }) {
-  return (
-    <svg 
-      viewBox="0 0 24 24" 
-      className={className}
-      fill="currentColor"
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
 
 export function Footer() {
   return (
     <footer className="bg-navy text-white">
-      {/* Contact Info Bar */}
-      <div className="border-b border-navy-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex items-center">
-              <span className="text-gray-300 text-sm">24/7 Member Services:</span>
-              <a 
-                href="tel:1-888-842-6328" 
-                className="ml-2 text-white font-semibold hover:underline"
-              >
-                1-888-842-6328
-              </a>
-            </div>
-            <div className="hidden sm:block w-px h-4 bg-gray-500" />
-            <div className="flex items-center">
-              <span className="text-gray-300 text-sm">Routing Number:</span>
-              <span className="ml-2 text-white font-semibold">256074974</span>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      {/* Contact Info Bar removed */}
+
 
       {/* Navigation Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -56,46 +25,7 @@ export function Footer() {
             ))}
           </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center space-x-4">
-            <a 
-              href="https://www.facebook.com/NavyFederal/" 
-              className="text-white hover:text-orange transition-colors"
-              aria-label="Facebook"
-              target="_blank" rel="noopener noreferrer"
-            >
-              <Facebook className="h-6 w-6" />
-            </a>
-            <a 
-              href="#" 
-              className="text-white hover:text-orange transition-colors"
-              aria-label="YouTube"
-            >
-              <Youtube className="h-6 w-6" />
-            </a>
-            <a 
-              href="#" 
-              className="text-white hover:text-orange transition-colors"
-              aria-label="X (Twitter)"
-            >
-              <XIcon className="h-5 w-5" />
-            </a>
-            <a 
-              href="https://www.instagram.com/navyfederal/" 
-              className="text-white hover:text-orange transition-colors"
-              aria-label="Instagram"
-              target="_blank" rel="noopener noreferrer"
-            >
-              <Instagram className="h-6 w-6" />
-            </a>
-            <a 
-              href="#" 
-              className="text-white hover:text-orange transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-          </div>
+          {/* Social Icons Removed */}
         </div>
 
         {/* Secondary Links */}

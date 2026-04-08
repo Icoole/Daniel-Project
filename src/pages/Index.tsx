@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -11,9 +12,7 @@ import AccountHeader from "@/components/AccountHeader";
 import BalanceCard from "@/components/BalanceCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import type { Transaction } from '../types/transaction';
-import { TRANSACTIONS as allTransactions } from '../../data/transactions';
-
-
+import { TRANSACTIONS as allTransactions } from '@/data/transactions';
 
 const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -130,19 +129,23 @@ const Index = () => {
                   <TableHead className="w-28 font-semibold text-slate-700">Date</TableHead>
                   <TableHead className="font-semibold text-slate-700">Description</TableHead>
                   <TableHead className="w-32 font-mono text-right font-semibold text-slate-700">Amount</TableHead>
-                <TableHead className="w-24 font-semibold text-slate-700">Type</TableHead>
+                  <TableHead className="w-24 font-semibold text-slate-700">Type</TableHead>
                 </TableRow>
-
               </TableHeader>
               <TableBody>
-{allTransactions.slice(0,5).map((tx) => (
+                {allTransactions.slice(0,5).map((tx: Transaction) => (
                   <TableRow key={tx.id} className="hover:bg-gradient-to-r hover:from-slate-50 hover:to-blue-50/30 border-b border-slate-100 transition-all">
                     <TableCell className="font-mono text-sm font-medium">{formatDate(tx.date)}</TableCell>
-                    <TableCell className="font-medium text-slate-900">{tx.description}</TableCell>
+<TableCell className="font-medium text-slate-900">
+  {tx.description}
+  <div className="text-xs text-slate-500 mt-1 font-mono">{tx.id}</div>
+</TableCell>
                     <TableCell className="text-right">
-                      <span className={`font-mono font-bold text-xl ${tx.type === 'credit' ? 'text-green-600 drop-shadow-sm' : 'text-red-600 drop-shadow-sm'}`}>
+  <span className="font-sans font-semibold text-sm text-slate-900 drop-shadow-sm">
+                    <span className="font-sans font-semibold text-sm text-slate-900 drop-shadow-sm">
                         {tx.type === 'credit' ? '+' : '-'}${Math.abs(tx.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}
                       </span>
+                    </span>
                     </TableCell>
                     <TableCell>
                       <Badge variant={tx.type === 'credit' ? "default" : "destructive"} className="capitalize shadow-sm">
@@ -153,10 +156,13 @@ const Index = () => {
                 ))}
               </TableBody>
             </Table>
-<div className="p-6 bg-gradient-to-r from-slate-50 to-blue-50/50 border-t flex justify-end">
-              <Button size="sm" className="font-mono uppercase text-xs tracking-wider shadow-sm hover:shadow-md bg-gradient-to-r from-orange to-orange-dark px-8">View Full History →</Button>
+            <div className="p-6 bg-gradient-to-r from-slate-50 to-blue-50/50 border-t flex justify-end">
+              <Link to="/transaction-ledger" className="no-underline">
+                <Button size="sm" className="font-mono uppercase text-xs tracking-wider shadow-sm hover:shadow-md bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8">
+                  View Full History →
+                </Button>
+              </Link>
             </div>
-
           </Card>
         </section>
       </div>

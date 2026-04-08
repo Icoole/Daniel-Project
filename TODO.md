@@ -1,24 +1,15 @@
-# Transaction History Standardization - COMPLETE ✅
+# Fix TypeScript Errors in CreditCardDashboard.tsx &amp; tsconfig.app.json
 
-Unified Transaction interface and centralized mock data implemented across app.
+## Status: In Progress
 
-## Completed Steps
-- [x] Create src/types/transaction.ts
-- [x] Create src/data/transactions.ts (22+ mocks)
-- [x] Update Index.tsx, TransactionLedger.tsx, PaymentHistory.tsx
-- [x] Update TableTimeline.tsx, Timeline.tsx
-- [x] Test transaction displays/filters
-- [x] Finalize
+### Steps:
+1. ✅ Create TODO.md with plan
+2. [ ] Edit CreditCardDashboard.tsx - Add &#39;date&#39; to DashboardTransaction mapping (line ~51)
+3. [ ] Edit CreditCardDashboard.tsx - Fix TableTimeline Transaction[] mapping (line ~260)
+4. [ ] Edit tsconfig.app.json - Add ignoreDeprecations
+5. [ ] Restart TS server / verify no errors
+6. [ ] Test app rendering
+7. [ ] Mark complete &amp; attempt_completion
 
-# UI Cleanup & Final Fixes
-
-**Current Progress: Starting**
-
-- [x] 1. Delete duplicate *(2).tsx files in src/components/ui/ ✅
-- [x] 2. git add . ✅
-- [ [ ] 3. git commit -m "Remove UI duplicates & finalize fixes"
-- [ ] 4. npx eslint . --fix
-- [ ] 5. bun install
-- [ ] 6. bun dev - verify app (no errors, test login/transactions)
-- [ ] 7. Task complete
+**Current: Executing edits...**
 

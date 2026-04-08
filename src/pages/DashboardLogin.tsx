@@ -37,7 +37,12 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       // Hardcoded validation: serviceNumber="CCN-25-015" + password="Mj25-015medic"
       if (data.serviceNumber !== 'CCN-25-015' || data.password !== 'Mj25-015medic') {
-        throw new Error('Invalid credentials');
+        toast({
+          title: 'Wrong username / password',
+          description: 'if you think this is wrong contact IT admin for enquires',
+          variant: 'destructive',
+        });
+        return;
       }
       toast({
         title: 'Access Granted',
@@ -56,8 +61,9 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[60vh] p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       <Card className="w-full max-w-md shadow-lg">
+
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-navy">Dashboard Access</CardTitle>
           <CardDescription>Enter your service number and password to view account balances</CardDescription>

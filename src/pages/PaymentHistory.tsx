@@ -1,11 +1,9 @@
 import { useAuth } from '@/hooks/useAuth';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TableTimeline } from '@/components/ui/TableTimeline';
 
-import type { Transaction } from '../types/transaction';
-import { TRANSACTIONS } from '../../data/transactions';
-
-
+import { TRANSACTIONS } from '../data/transactions';
 
 export default function PaymentHistory() {
   const { isAuthenticated } = useAuth();
@@ -35,10 +33,6 @@ export default function PaymentHistory() {
             className="p-8 backdrop-blur-xl bg-gradient-to-b from-black/20 to-transparent rounded-3xl border border-cyan-500/30 shadow-2xl"
           >
             <TableTimeline transactions={TRANSACTIONS} />
-</xai:function_call > 
-
-<xai:function_call name="edit_file">
-<parameter name="path">c:/Users/HP/Downloads/app/TODO.md
           </motion.div>
         </CardContent>
       </Card>

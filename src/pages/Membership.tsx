@@ -1,7 +1,5 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { motion } from 'framer-motion';
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Shield, Award, Heart, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -41,10 +39,8 @@ const benefits = [
 
 export function Membership() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1">
+    <main className="flex-1">
+
         {/* Hero Section */}
         <section className="bg-navy py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -225,9 +221,6 @@ export function Membership() {
           </div>
         </section>
       </main>
-
-      <Footer />
-      <ScrollToTop />
-    </div>
   );
 }
+

@@ -1,7 +1,5 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { motion } from 'framer-motion';
+
 import { Button } from '@/components/ui/button';
 import { EligibilityForm } from '@/components/EligibilityForm';
 import { Star, Check } from 'lucide-react';
@@ -57,10 +55,8 @@ const autoLoans = [
 
 export function AutoLoans() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1">
+    <main className="flex-1">
+
         {/* Hero */}
         <section className="bg-navy py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -177,9 +173,6 @@ export function AutoLoans() {
           </div>
         </section>
       </main>
-
-      <Footer />
-      <ScrollToTop />
-    </div>
   );
 }
+

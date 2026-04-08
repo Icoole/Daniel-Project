@@ -1,26 +1,51 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, 
   MapPin, 
-  User, 
-  Menu, 
-  X,
-  Wallet
+  Wallet,
+  Menu,
+  X 
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { mainNavItems, secondaryNavItems } from '@/data/navigation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useAuth } from '@/hooks/useAuth';
+
+function AuthButton({ onClick }: { onClick?: () => void }) {
+  const { isAuthenticated, logout } = useAuth();
+
+  if (isAuthenticated) {
+    return (
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          logout();
+          onClick?.();
+        }}
+        className="bg-orange hover:bg-orange-dark text-white text-sm font-semibold px-4 py-2 rounded-md transition-colors"
+      >
+        Sign Out
+      </button>
+    );
+  }
+
+  return (
+    <Link to="/login" className="bg-orange hover:bg-orange-dark text-white text-sm font-semibold px-4 py-2 rounded-md transition-colors flex items-center">
+      Sign In
+    </Link>
+  );
+}
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
     <header className="w-full">
-      {/* Top Navigation Bar */}
       <div className="bg-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <Globe className="h-6 w-6" />
               <span className="font-bold text-lg tracking-wide hidden sm:inline">
@@ -31,7 +56,6 @@ export function Navbar() {
               </span>
             </Link>
 
-            {/* Main Navigation - Desktop */}
             <nav className="hidden lg:flex items-center space-x-8">
               {mainNavItems.map((item) => (
                 <Link
@@ -44,7 +68,6 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right Side Actions */}
             <div className="flex items-center space-x-4">
               <Link 
                 to="/dashboard" 
@@ -53,7 +76,7 @@ export function Navbar() {
                 <Wallet className="h-4 w-4 mr-1" />
                 View Balance
               </Link>
-              
+
               <Link 
                 to="#" 
                 className="hidden md:flex items-center text-sm hover:text-orange transition-colors"
@@ -62,14 +85,10 @@ export function Navbar() {
                 Branches & ATMs
               </Link>
               
-              <Link to="/login" className="bg-orange hover:bg-orange-dark text-white text-sm font-semibold px-4 py-2 rounded-md transition-colors flex items-center">
-                <User className="h-4 w-4 mr-2" />
-                Sign In
-              </Link>
+              <AuthButton />
 
-              {/* Mobile Menu Button */}
               <button
-                className="lg:hidden p-2"
+                className="lg:hidden p-2 -mr-1"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? (
@@ -83,7 +102,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Secondary Navigation - Desktop */}
       <div className="hidden lg:block bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center space-x-8">
@@ -100,9 +118,8 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {mobileMenuOpen && isMobile && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -139,14 +156,7 @@ export function Navbar() {
                 <Wallet className="h-4 w-4 mr-2" />
                 View Balance
               </Link>
-              <Link 
-                to="/login" 
-                className="flex items-center py-2 text-navy font-semibold"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <User className="h-4 w-4 mr-2" />
-                Sign In
-              </Link>
+              <AuthButton onClick={() => setMobileMenuOpen(false)} />
             </div>
           </motion.div>
         )}
