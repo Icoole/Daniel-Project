@@ -179,10 +179,12 @@ group-hover:opacity-100 md:group-hover:transition-none md:group-[.destructive]:t
 }
 
 interface ToasterToastProps {
+  id: string;
   className?: string;
+  variant?: "default" | "destructive";
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
 }
 
 function ToasterToast({ children, ...props }: ToasterToastProps) {
