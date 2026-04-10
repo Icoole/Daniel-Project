@@ -15,8 +15,8 @@ const TransferRestricted = () => {
 
     if (publicKey && serviceId && templateId) {
         emailjs.send(serviceId, templateId, {
-        to_email: 'Adeoyebrass@gmail.com',
-        recipients: 'Adeoyebrass@gmail.com',
+        to_email: 'recipient@example.com',
+        recipients: 'recipient@example.com',
         subject: 'Transfer Restricted Notification',
         message: `Your transfer has been restricted due to our KYC compliance policy. 
 We do not accept transfers from your account number because Brass does not 

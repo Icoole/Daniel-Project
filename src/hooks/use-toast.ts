@@ -72,18 +72,33 @@ function reducer(state: State, action: Action): State {
         ...state,
         toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
       };
-    case "DISMISS_TOAST":
+    case "DISMISS_TOAST": {
       const { toastId } = action;
-      if (toastId) addToRemoveQueue(toastId);
-      else state.toasts.forEach((toast) => addToRemoveQueue(toast.id));
+      // Note: addToRemoveQueue is called here
+      if (toastId) {
+        addToRemoveQueue(toastId);
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id);
+        });
+      }
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined ? { ...t, open: false } : t
+          t.id === toastId || toastId === undefined ? {
+            ...t,
+            open: false
+          } : t
         ),
       };
+    }
     case "REMOVE_TOAST":
-      if (action.toastId === undefined) return { ...state, toasts: [] };
+      if (action.toastId === undefined) {
+        return {
+          ...state,
+          toasts: []
+        };
+      }
       return {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
@@ -91,11 +106,16 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-type Toast = Omit<ToasterToast, "id" | "open" | "onOpenChange">;
+type Toast = Omit<ToasterToast, "id"> & {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+};
 
-function toast(props: Toast) {
+function toast(this: void, props: Omit<Toast, "id" | "open" | "onOpenChange">) {
   const id = genId();
+
   const update = (props: Partial<ToasterToast>) => dispatch({ type: "UPDATE_TOAST", toast: { ...props, id } });
+
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
 
   dispatch({
@@ -104,11 +124,17 @@ function toast(props: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open: boolean) => !open && dismiss(),
+      onOpenChange: (open: boolean) => {
+        if (!open) dismiss();
+      },
     },
   });
 
-  return { id, dismiss, update };
+  return {
+    id,
+    dismiss,
+    update
+  };
 }
 
 function useToast() {
@@ -118,7 +144,9 @@ function useToast() {
     listeners.push(setState);
     return () => {
       const index = listeners.indexOf(setState);
-      if (index > -1) listeners.splice(index, 1);
+      if (index > -1) {
+        listeners.splice(index, 1);
+      }
     };
   }, [state]);
 
@@ -130,4 +158,3 @@ function useToast() {
 }
 
 export { useToast, toast };
-

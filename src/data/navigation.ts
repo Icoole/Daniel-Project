@@ -14,7 +14,7 @@ export const mainNavItems: NavItem[] = [
   { label: 'Membership', href: '/membership' },
 ];
 
-export const secondaryNavItems = [
+export const secondaryNavItems: NavItem[] = [
   {
     label: 'Checking & Savings',
     href: '/checking-savings'

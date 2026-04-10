@@ -49,7 +49,7 @@ export function Navbar() {
             <Link to="/" className="flex items-center space-x-2">
               <Globe className="h-6 w-6" />
               <span className="font-bold text-lg tracking-wide hidden sm:inline">
-                NAVY FEDERAL CREDIT UNION
+                Federal Navy credit union
               </span>
               <span className="font-bold text-lg tracking-wide sm:hidden">
                 NFCU

@@ -1,51 +1,49 @@
-
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Wallet, PiggyBank, Landmark, TrendingUp, GraduationCap, Gift, Star } from 'lucide-react';
+import { Wallet, PiggyBank, Landmark, TrendingUp, GraduationCap, Gift, Star } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
-
 
 const products = [
   {
     id: 'checking',
     title: 'Checking Accounts & the Navy Federal Debit Card',
-    description: 'Checking accounts with great benefits to meet your financial goals.',
+    description: 'Checking accounts with great benefits to meet your financial goals. Enjoy no monthly service fees, free online and mobile banking, and access to over 30,000 no-fee ATMs worldwide. Earn competitive dividends and get paid up to 2 days sooner with direct deposit.',
     icon: Wallet,
     href: '#',
   },
   {
     id: 'savings',
     title: 'Savings Accounts',
-    description: 'Accounts and tools tailored to help you meet your savings goals.',
+    description: 'Accounts and tools tailored to help you meet your savings goals. Choose from a variety of savings options including Share Savings, MoneyBuilder Savings, and Jumbo Money Market Savings. Automatic transfers and savings ladders help you grow your savings effortlessly.',
     icon: PiggyBank,
     href: '#',
   },
   {
     id: 'certificates',
     title: 'Certificates',
-    description: 'Start saving today for your future. Explore low-minimum, standard and IRA options.',
+    description: 'Start saving today for your future. Explore low-minimum, standard and IRA options with terms from 3 months to 7 years. Enjoy guaranteed rates, flexible minimum deposits starting at $100, and easy rollovers. Perfect for short-term goals or long-term planning.',
     icon: Landmark,
     href: '#',
   },
   {
     id: 'money-market',
     title: 'Money Market Savings Accounts',
-    description: 'Explore money market savings accounts (MMSAs) rates and options.',
+    description: 'Explore money market savings accounts (MMSAs) rates and options. Earn higher dividends with tiered rates, enjoy check-writing privileges, unlimited free electronic transfers, and liquidity with no withdrawal limits. Ideal for balancing growth and access.',
     icon: TrendingUp,
     href: '#',
   },
   {
     id: 'retirement',
     title: 'Retirement Savings Options',
-    description: 'Learn how you can grow your savings through a variety of retirement accounts and plans.',
-    icon: Wallet,
+    description: 'Learn how you can grow your savings through a variety of retirement accounts and plans. Choose from Traditional IRA, Roth IRA, IRA Certificates, and Roth IRA Certificates. Tax advantages, flexible contributions, and rollover options help secure your retirement.',
+    icon: GraduationCap,
     href: '#',
   },
   {
     id: 'education',
     title: 'Education Savings Options',
-    description: 'Find the best option to save for your education, from ESAs to certificates.',
-    icon: GraduationCap,
+    description: 'Find the best option to save for your education, from ESAs to certificates. Coverdell Education Savings Accounts, Youth Savings Accounts, and certificates provide tax-free growth for qualified education expenses. Start early to maximize compound interest.',
+    icon: Gift,
     href: '#',
   },
 ];
@@ -108,16 +106,12 @@ export function CheckingSavings() {
                         <product.icon className="h-8 w-8 text-navy" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-navy group-hover:text-link transition-colors">
+                        <h3 className="font-semibold text-navy text-xl">
                           {product.title}
                         </h3>
-                        <p className="text-gray-600 text-sm mt-2">
+                        <p className="text-gray-600 mt-2">
                           {product.description}
                         </p>
-                        <span className="inline-flex items-center text-link text-sm font-semibold mt-4 group-hover:underline">
-                          Learn More
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </span>
                       </div>
                     </div>
                   </Link>
@@ -148,13 +142,6 @@ export function CheckingSavings() {
                   Find the Navy Federal prepaid or gift card that&apos;s right for you, 
                   your family and as gifts—GO Prepaid and Navy Federal Gift Cards.
                 </p>
-                <Link
-                  to="#"
-                  className="inline-flex items-center text-link font-semibold mt-4 hover:underline"
-                >
-                  Learn More
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
               </motion.div>
 
               <motion.div
@@ -174,13 +161,6 @@ export function CheckingSavings() {
                   Understand the benefits of a savings account, the features to look 
                   for and what you need to open an account.
                 </p>
-                <Link
-                  to="#"
-                  className="inline-flex items-center text-link font-semibold mt-4 hover:underline"
-                >
-                  Learn More
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
               </motion.div>
             </div>
           </div>
@@ -189,5 +169,4 @@ export function CheckingSavings() {
     </main>
   );
 }
-
 

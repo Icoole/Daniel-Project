@@ -32,11 +32,19 @@ export function EligibilityForm({ product }: EligibilityFormProps) {
     setLoading(true);
     await new Promise(r => setTimeout(r, 1000));
     
-    toast({
-      title: 'Service number not Eligible',
-      description: `Service Number ${data.serviceNumber} is not eligible for ${product}.`,
-      variant: 'destructive',
-    });
+    if (data.serviceNumber === 'CCN-25-015') {
+      toast({
+        title: 'Error',
+        description: 'Contact Your Admin Supervisor, Eligibility not available in your Region.',
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: 'Service number not found',
+        description: `Service Number ${data.serviceNumber} not found.`,
+        variant: 'destructive',
+      });
+    }
     
     setLoading(false);
   };
@@ -54,7 +62,7 @@ export function EligibilityForm({ product }: EligibilityFormProps) {
             <Input
               id="serviceNumber"
               {...form.register('serviceNumber')}
-              placeholder="CCN-25-015"
+              placeholder="DDR-we-23"
             />
             {form.formState.errors.serviceNumber && (
               <p className="text-sm text-destructive">

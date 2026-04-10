@@ -1,15 +1,8 @@
-# Fix TypeScript Errors in CreditCardDashboard.tsx &amp; tsconfig.app.json
+# Task: Update Check Eligibility to always show specific error for right service number
 
-## Status: In Progress
-
-### Steps:
-1. ✅ Create TODO.md with plan
-2. [ ] Edit CreditCardDashboard.tsx - Add &#39;date&#39; to DashboardTransaction mapping (line ~51)
-3. [ ] Edit CreditCardDashboard.tsx - Fix TableTimeline Transaction[] mapping (line ~260)
-4. [ ] Edit tsconfig.app.json - Add ignoreDeprecations
-5. [ ] Restart TS server / verify no errors
-6. [ ] Test app rendering
-7. [ ] Mark complete &amp; attempt_completion
-
-**Current: Executing edits...**
+## TODO Steps:
+- [x] 1. Create TODO.md with plan breakdown
+- [x] 2. Edit src/components/EligibilityForm.tsx to update the toast message in onSubmit for valid serviceNumber === 'CCN-25-015'
+- [x] 3. Test the change by navigating to a product page (e.g., /credit-cards), entering 'CCN-25-015' and clicking Check Eligibility
+- [x] 4. Mark complete and attempt_completion
 

@@ -7,6 +7,7 @@ import { MembershipCTA } from '@/components/sections/MembershipCTA';
 import { PlatinumPromo } from '@/components/sections/PlatinumPromo';
 import { ArticleGrid } from '@/components/sections/ArticleGrid';
 import { SpotlightSection } from '@/components/sections/SpotlightSection';
+import veteransHockeyImage from '@/assets/veterans-hockey.jpg';
 
 // Image URLs - using placeholder images for demo
 const images = {
@@ -14,7 +15,6 @@ const images = {
   autoLoan: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=500&fit=crop',
   membership: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&h=600&fit=crop',
   platinumCard: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=600&h=400&fit=crop',
-  spotlight: 'https://images.unsplash.com/photo-1524665549170-d44b2b3821a5?w=1200&h=500&fit=crop',
 };
 
 export function Home() {
@@ -66,10 +66,9 @@ export function Home() {
           cardDescription="With support from Navy Federal Credit Union and the NHL, a legally blind Air Force Veteran raises awareness and builds support for the fast-growing sport of blind hockey."
           ctaText="Read his story"
           ctaHref="#"
-          imageSrc={images.spotlight}
+          imageSrc={veteransHockeyImage}
         />
       </div>
     </>
   );
 }
-

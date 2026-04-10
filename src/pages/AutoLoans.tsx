@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 
-import { Button } from '@/components/ui/button';
 import { EligibilityForm } from '@/components/EligibilityForm';
 import { Star, Check } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -160,13 +159,7 @@ export function AutoLoans() {
                     ))}
                   </ul>
                   
-                  <Button 
-                    variant="link"
-                    className="p-0 h-auto text-link font-semibold mt-6 hover:underline"
-                    asChild
-                  >
-                    <EligibilityForm product={`${loan.name}`} />
-                  </Button>
+                  <EligibilityForm product={loan.name} />
                 </motion.div>
               ))}
             </motion.div>
@@ -175,4 +168,3 @@ export function AutoLoans() {
       </main>
   );
 }
-

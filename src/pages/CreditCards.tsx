@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { Button } from '@/components/ui/button';
+
 import { EligibilityForm } from '@/components/EligibilityForm';
 import { Check, Star } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -23,7 +23,7 @@ const creditCards = [
   },
   {
     id: 'cashrewards',
-    name: 'cashRewards',
+    name: 'cashRewards Card',
     tagline: 'Earn while you spend',
     description: 'Earn unlimited 1.75% cash back on every purchase. No caps, no categories, no annual fee.',
     apr: '1.75%',
@@ -173,13 +173,7 @@ export function CreditCards() {
                     ))}
                   </ul>
                   
-                  <Button 
-                    variant="link"
-                    className="p-0 h-auto text-link font-semibold mt-6 hover:underline"
-                    asChild
-                  >
-                    <EligibilityForm product={card.name} />
-                  </Button>
+                  <EligibilityForm product={card.name} />
                 </motion.div>
               ))}
             </motion.div>

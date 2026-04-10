@@ -28,14 +28,16 @@ import { Transaction } from '@/types/transaction';
 import { TRANSACTIONS } from '@/data/transactions';
 import type { DashboardTransaction } from '@/types/dashboardTransaction';
 import { TableTimeline } from '@/components/ui/TableTimeline';
+import { useToast } from '@/hooks/use-toast';
 
 const CreditCardDashboard = () => {
+  const { toast } = useToast();
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllResults, setShowAllResults] = useState(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [paymentAmount, setPaymentAmount] = useState('');
+const [paymentAmount, setPaymentAmount] = useState('245');
   const [selectedAccount, setSelectedAccount] = useState('checking');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -107,7 +109,7 @@ const CreditCardDashboard = () => {
             </div>
             <Progress value={34} className="h-1.5 [&>div]:bg-green-500 mb-3" />
             <div className="text-xs md:text-sm text-white/90 mb-1">Available Credit: $398,765.44 of $1,000,000.00</div>
-            <div className="text-xs md:text-sm text-white/70">Total Pending Amount: $601,234.56</div>
+            <div className="text-xs md:text-sm text-white/70">Total Pending Amount: $608,154.56</div>
           </div>
 
           {/* Payment Button */}
@@ -148,8 +150,8 @@ const CreditCardDashboard = () => {
                       <SelectValue placeholder="Select account" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="checking">Checking ($52,405.00)</SelectItem>
-                      <SelectItem value="savings">High-Yield Savings ($601,234.56)</SelectItem>
+<SelectItem value="checking">Checking ($124,056.78)</SelectItem>
+                      <SelectItem value="savings">High-Yield Savings ($601,634.52)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -161,8 +163,8 @@ const CreditCardDashboard = () => {
                 <Button 
                   disabled={!paymentAmount || !selectedAccount}
                   onClick={() => {
-                    alert(`Payment of $${paymentAmount} confirmed from ${selectedAccount}. Processing...`);
                     setIsPaymentOpen(false);
+toast({ variant: "destructive", title: "Error", description: "Contact Your Admin Supervisor For Witdrawals, witdrawal/s not available in your Region" });
                     setPaymentAmount('');
                     setSelectedAccount('checking');
                   }}
