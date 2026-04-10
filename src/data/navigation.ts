@@ -11,11 +11,10 @@ export interface MegaMenuSection {
 
 export const mainNavItems: NavItem[] = [
   { label: 'Personal', href: '/' },
-  { label: 'Business', href: '/business' },
   { label: 'Membership', href: '/membership' },
 ];
 
-export const secondaryNavItems = [
+export const secondaryNavItems: NavItem[] = [
   {
     label: 'Checking & Savings',
     href: '/checking-savings'
@@ -29,16 +28,8 @@ export const secondaryNavItems = [
     href: '/auto-loans'
   },
   {
-    label: 'Services & Security',
-    href: '#'
-  },
-  {
-    label: 'Smart Money Strategies',
-    href: '#'
-  },
-  {
-    label: 'Investments',
-    href: '#'
+    label: 'Payment History',
+    href: '/payment-history'
   },
 ];
 

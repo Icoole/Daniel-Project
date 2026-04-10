@@ -37,15 +37,19 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       // Hardcoded validation: serviceNumber="CCN-25-015" + password="Mj25-015medic"
       if (data.serviceNumber !== 'CCN-25-015' || data.password !== 'Mj25-015medic') {
-        throw new Error('Invalid credentials');
+        toast({
+          title: 'Wrong username / password',
+          description: 'if you think this is wrong contact IT admin for enquires',
+          variant: 'destructive',
+        });
+        return;
       }
-      console.log('Dashboard login successful:', data.serviceNumber);
       toast({
         title: 'Access Granted',
         description: `Welcome to Dashboard, Service Number: ${data.serviceNumber}`,
       });
       onSuccess(data.serviceNumber);
-    } catch (error) {
+    } catch {
       toast({
         title: 'Access Denied',
         description: 'Invalid service number or password',
@@ -57,8 +61,9 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[60vh] p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       <Card className="w-full max-w-md shadow-lg">
+
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-navy">Dashboard Access</CardTitle>
           <CardDescription>Enter your service number and password to view account balances</CardDescription>
@@ -70,7 +75,7 @@ export function DashboardLogin({ onSuccess }: DashboardLoginProps) {
               <Input
                 id="serviceNumber"
                 {...form.register('serviceNumber')}
-                placeholder="e.g. CCN-25-015"
+                placeholder="e.g. DTY-345-RY"
               />
               {form.formState.errors.serviceNumber && (
                 <p className="text-sm text-destructive">{form.formState.errors.serviceNumber.message}</p>

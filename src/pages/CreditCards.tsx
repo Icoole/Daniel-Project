@@ -1,10 +1,8 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+
+import { EligibilityForm } from '@/components/EligibilityForm';
+import { Check, Star } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 const creditCards = [
@@ -25,7 +23,7 @@ const creditCards = [
   },
   {
     id: 'cashrewards',
-    name: 'cashRewards',
+    name: 'cashRewards Card',
     tagline: 'Earn while you spend',
     description: 'Earn unlimited 1.75% cash back on every purchase. No caps, no categories, no annual fee.',
     apr: '1.75%',
@@ -55,12 +53,11 @@ const creditCards = [
   },
 ];
 
+
 export function CreditCards() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1">
+    <main className="flex-1">
+
         {/* Hero Section */}
         <section className="bg-navy py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,11 +105,7 @@ export function CreditCards() {
                     Platinum card, gold-star savings—pay 0% interest the first year 
                     on transferred balances and change your whole game.
                   </p>
-                  <Button 
-                    className="bg-orange hover:bg-orange-dark text-white font-semibold mt-6"
-                  >
-                    See Offer Details
-                  </Button>
+<EligibilityForm product="Credit Cards" />
                 </div>
                 <div className="flex justify-center">
                   <img
@@ -180,22 +173,13 @@ export function CreditCards() {
                     ))}
                   </ul>
                   
-                  <Link
-                    to={card.href}
-                    className="inline-flex items-center text-link font-semibold mt-6 hover:underline"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
+                  <EligibilityForm product={card.name} />
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
       </main>
-
-      <Footer />
-      <ScrollToTop />
-    </div>
   );
 }
+

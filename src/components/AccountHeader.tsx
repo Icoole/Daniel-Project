@@ -1,40 +1,33 @@
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Shield } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpeg";
+import { Wallet, Eye, EyeOff, Shield } from "lucide-react";
 
 interface AccountHeaderProps {
   name: string;
-  rank: string;
-  branch: string;
   serviceNumber: string;
-  mos: string;
+  rank?: string;
+  branch?: string;
+  mos?: string;
   isPrivate: boolean;
   onTogglePrivacy: () => void;
 }
 
-const AccountHeader = ({ name, rank, branch, serviceNumber, mos, isPrivate, onTogglePrivacy }: AccountHeaderProps) => {
+const AccountHeader = ({ name, serviceNumber, isPrivate, onTogglePrivacy }: AccountHeaderProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-between mb-10"
+      className="flex items-center justify-between w-full mb-10"
     >
       <div className="flex items-center gap-4">
-        <div className="relative">
-          <img
-            src={profilePhoto}
-            alt="Service member profile"
-            className="w-14 h-14 rounded-full object-cover border-2 border-primary/40"
-          />
-          <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-primary border-2 border-background" />
+        <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center border-2 border-primary/20 p-3 shadow-lg">
+          <Wallet className="w-8 h-8 text-primary" />
         </div>
-        <div className="space-y-0.5">
-          <p className="text-foreground font-semibold text-lg">{name}</p>
-          <p className="text-xs text-muted-foreground font-mono uppercase tracking-label">
-            {rank} · {branch} · PAY GRADE {rank}
+        <div className="space-y-1">
+          <p className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground/70 bg-clip-text text-transparent">
+            Hello, {name}
           </p>
-          <p className="text-xs text-muted-foreground font-mono uppercase tracking-label">
-            SVC# {serviceNumber} · MOS {mos}
+          <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+            SVC# {serviceNumber}
           </p>
         </div>
       </div>

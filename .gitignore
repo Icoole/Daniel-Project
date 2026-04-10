@@ -47,3 +47,5 @@ vite.config.ts.cache
 
 # Zip file (artifact)
 OKComputer_Clone_Navy_Federal_Site.zip
+.vercel
+.env*.local
