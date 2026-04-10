@@ -178,8 +178,11 @@ group-hover:opacity-100 md:group-hover:transition-none md:group-[.destructive]:t
   )
 }
 
-interface ToasterToastProps extends React.PropsWithChildren<ToasterToast> {
+interface ToasterToastProps {
   className?: string;
+  children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 function ToasterToast({ children, ...props }: ToasterToastProps) {
